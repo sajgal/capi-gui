@@ -13,15 +13,19 @@ const Logo = styled.div`
   font-style: italic;
 `;
 
+const LayoutFullHeight = styled(Layout)`
+  height: 100vh;
+`;
+
 export default () => (
   <>
     <Head>
-      <title>Home - Nextron (with-javascript-ant-design)</title>
+      <title>CAPI Desktop - Home</title>
     </Head>
 
-    <Layout>
+    <LayoutFullHeight>
       <Sider
-        breakpoint="lg"
+        breakpoint="md"
         collapsedWidth="0"
         onBreakpoint={broken => {
           console.log(broken);
@@ -35,20 +39,14 @@ export default () => (
         </Logo>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
           <Menu.Item key="1">
-            <Icon type="user" />
-            <span className="nav-text">nav 1</span>
+            <Link href="/home">
+              <span className="nav-text"><Icon type="home" /> Home</span>
+            </Link>
           </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="video-camera" />
-            <span className="nav-text">nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="upload" />
-            <span className="nav-text">nav 3</span>
-          </Menu.Item>
-          <Menu.Item key="4">
-            <Icon type="user" />
-            <span className="nav-text">nav 4</span>
+          <Menu.Item key="2" href="/settings">
+            <Link href="/settings">
+              <span className="nav-text"><Icon type="setting" /> Settings</span>
+            </Link>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -59,6 +57,6 @@ export default () => (
         </Content>
         <Footer style={{ textAlign: 'center' }}>Switch Media ©2019 - With <Icon type="heart" /> from Sydney </Footer>
       </Layout>
-    </Layout>
+    </LayoutFullHeight>
   </>
 );
