@@ -1,18 +1,15 @@
 import React from 'react';
-import Link from 'next/link';
-import { Icon, Button } from 'antd';
+import Head from 'next/head';
 
 const settings = () => {
   return (
-    <div>
-      <Link href="/home">
-        <Button size='large' type='primary' htmlType='submit'>
-          <Icon type="double-left" /> Home
-        </Button>
-      </Link>
-      <hr />
+    <>
+      <Head>
+        <title>CAPI Desktop - Settings</title>
+      </Head>
+
       Settings!
-    </div>
+    </>
   );
 };
 
