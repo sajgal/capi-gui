@@ -24,11 +24,16 @@
     "antd": "^3.19.2",
     "electron-serve": "^0.3.0",
     "electron-store": "^3.3.0",
+    "faker": "^4.1.0",
+    "mobx": "^5.11.0",
+    "mobx-react": "^6.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@zeit/next-css": "^1.0.1",
     "arg": "^4.1.0",
     "babel-plugin-import": "^1.12.0",
