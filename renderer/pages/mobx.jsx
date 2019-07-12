@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import { observer } from 'mobx-react';
 import { Button } from 'antd';
+import PageContent from '../components/PageContent';
 
 class MobXExample extends Component {
   static async getInitialProps({ mobxStore, query }) {
@@ -24,7 +25,7 @@ class MobXExample extends Component {
       </div>
     });
 
-    return <div>
+    return <PageContent header="Mobx Example">
       <Head>
         <title>CAPI Desktop - MobX</title>
       </Head>
@@ -32,7 +33,7 @@ class MobXExample extends Component {
       {list}
 
       <Button type="primary" shape="circle" icon="plus" onClick={employeeStore.add} />
-    </div>
+    </PageContent>
   }
 }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import Link from 'next/link';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Icon } from 'antd';
 import Sider from '../components/Sider';
 
 const { Header, Content, Footer } = Layout;
@@ -27,10 +26,7 @@ class Page extends Component {
         <LayoutFullHeight>
           <Sider />
           <Layout>
-            <Header style={{ background: '#fff', padding: 0 }} />
-            <Content style={{ margin: '24px 16px 0' }}>
-              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>{this.props.children}</div>
-            </Content>
+            {this.props.children}
             <Footer style={{ textAlign: 'center' }}>Switch Media ©2019 - With <Icon type="heart" /> from Sydney </Footer>
           </Layout>
         </LayoutFullHeight>
