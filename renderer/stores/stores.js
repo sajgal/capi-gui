@@ -1,6 +1,5 @@
 import { useStaticRendering } from 'mobx-react';
 
-import EmployeeStore from './EmployeeStore';
 import ShowStore from './ShowStore';
 import ShowTransportLayer from './transport/ShowTransportLayer';
 
@@ -11,7 +10,6 @@ let store = null;
 
 const getStores = function() {
   return {
-    employeeStore: new EmployeeStore(),
     showStore: new ShowStore(new ShowTransportLayer()),
   };
 }

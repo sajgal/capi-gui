@@ -10,10 +10,7 @@ class ShowStore {
   }
 
   loadShows() {
-    console.log('loading shows');
-
     this.isLoading = true;
-
     this.transportLayer
       .fetchShows()
       .then(response => {
@@ -22,10 +19,8 @@ class ShowStore {
   };
 
   updateShows(showsData) {
-    console.log('updating shows');
     this.shows = showsData || [];
     this.isLoading = false;
-    console.log('all done');
   }
 }
 

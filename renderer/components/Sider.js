@@ -23,14 +23,13 @@ const SiderComponent = ({ router }) => {
         <Menu.Item key="/home" onClick={() => router.push('/home')}>
           <span className="nav-text"><Icon type="home" /> Home</span>
         </Menu.Item>
-        <Menu.Item key="/settings" onClick={() => router.push('/settings')}>
-            <span className="nav-text"><Icon type="control" /> Settings</span>
-        </Menu.Item>
+
         <Menu.Item key="/shows" onClick={() => router.push('/shows')}>
             <span className="nav-text"><Icon type="fire" theme="twoTone" twoToneColor="#eb2f96" /> Shows</span>
         </Menu.Item>
-        <Menu.Item key="/mobx" onClick={() => router.push('/mobx')}>
-            <span className="nav-text"><Icon type="medium" /> MobX Example</span>
+
+        <Menu.Item key="/settings" onClick={() => router.push('/settings')}>
+            <span className="nav-text"><Icon type="control" /> Settings</span>
         </Menu.Item>
       </Menu>
     </Sider>

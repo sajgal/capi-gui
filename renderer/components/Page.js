@@ -27,7 +27,6 @@ class Page extends Component {
           <Sider />
           <Layout>
             {this.props.children}
-            <Footer style={{ textAlign: 'center' }}>Switch Media ©2019 - With <Icon type="heart" /> from Sydney </Footer>
           </Layout>
         </LayoutFullHeight>
       </ThemeProvider>

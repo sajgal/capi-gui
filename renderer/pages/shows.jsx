@@ -1,36 +1,43 @@
 import React from 'react';
 import Head from 'next/head';
-import { Icon, Button } from 'antd';
+import { Icon, Table } from 'antd';
 import { observer } from 'mobx-react';
+import styled from 'styled-components';
+
 import PageContent from '../components/PageContent';
+import { SHOW_TABLE_SCHEMA } from "../schema/showTable";
+
+const StyledTable = styled(Table)`
+  table {
+    background: white;
+  }
+`;
 
 class Shows extends React.Component {
   static getInitialProps({ mobxStore }) {
+    const showStore = mobxStore.showStore;
+
+    if (showStore.shows.length === 0) {
+      showStore.loadShows();
+    }
+
     return {
-      showStore: mobxStore.showStore,
+      showStore: showStore,
     };
   }
 
   render() {
-    const shows = () => {
-      if (this.props.showStore.shows.length === 0) {
-        return <Button onClick={this.props.showStore.loadShows}>Load shows</Button>
-      }
-
-      const showArray = this.props.showStore.shows.map(show => {
-        return <div key={show.id}>{show.title}</div>
-      });
-
-      return showArray;
-    }
-
     return (
-      <PageContent header="Shows">
+      <PageContent header="Shows" hideFooter={true} hideContentWrapper={true}>
         <Head>
           <title>CAPI Desktop - Shows</title>
         </Head>
 
-        {this.props.showStore.isLoading ? <Icon type="loading" /> : shows()}
+        {
+          this.props.showStore.isLoading ?
+            <Icon type="loading" /> :
+            <StyledTable rowKey="id" columns={SHOW_TABLE_SCHEMA} dataSource={this.props.showStore.shows} size="middle" bordered={true} />
+        }
       </PageContent>
     );
   }
