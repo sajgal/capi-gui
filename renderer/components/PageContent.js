@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, PageHeader } from 'antd';
+import { withRouter } from 'next/router';
 
 const { Header, Content } = Layout;
 
@@ -8,7 +9,11 @@ const PageContent = props => {
     <>
       {
         props.header &&
-        <Header style={{ background: '#fff', padding: "3px 18px" }}>{props.header}</Header>
+        <PageHeader
+          title={props.header}
+          subTitle={props.subtitle || ""}
+          // onBack={() => props.router.push('/home')}
+        />
       }
 
       <Content style={{ margin: '24px 16px 0' }}>
@@ -18,4 +23,4 @@ const PageContent = props => {
   );
 }
 
-export default PageContent;
+export default withRouter(PageContent);

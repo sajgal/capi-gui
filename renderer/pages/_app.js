@@ -1,10 +1,13 @@
 import App, { Container } from 'next/app';
 import Page from '../components/Page';
 import { Provider } from 'mobx-react';
+import { configure } from 'mobx';
 
 import initializeStore from '../stores/stores';
 
 import "antd/dist/antd.css";
+
+configure({ enforceActions: "observed" });
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
