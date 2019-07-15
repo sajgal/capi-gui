@@ -2,12 +2,25 @@ import App, { Container } from 'next/app';
 import Page from '../components/Page';
 import { Provider } from 'mobx-react';
 import { configure } from 'mobx';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 
 import initializeStore from '../stores/stores';
 
 import "antd/dist/antd.css";
 
 configure({ enforceActions: "observed" });
+
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 class MyApp extends App {
   static async getInitialProps(appContext) {

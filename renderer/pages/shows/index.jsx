@@ -4,8 +4,8 @@ import { Icon, Table } from 'antd';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
-import PageContent from '../components/PageContent';
-import { SHOW_TABLE_SCHEMA } from "../schema/showTable";
+import PageContent from '../../components/PageContent';
+import { SHOW_TABLE_SCHEMA } from "../../schema/showTable";
 
 const StyledTable = styled(Table)`
   table {

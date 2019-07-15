@@ -19,17 +19,32 @@ const SiderComponent = ({ router }) => {
         CAPI Desktop
       </Logo>
 
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['/home']} selectedKeys={[router.pathname]}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={['/home']}
+        selectedKeys={[router.pathname]}
+        defaultOpenKeys={["show-submenu"]}
+        forceSubMenuRender={true}
+      >
         <Menu.Item key="/home" onClick={() => router.push('/home')}>
           <span className="nav-text"><Icon type="home" /> Home</span>
         </Menu.Item>
 
-        <Menu.Item key="/shows" onClick={() => router.push('/shows')}>
-            <span className="nav-text"><Icon type="fire" theme="twoTone" twoToneColor="#eb2f96" /> Shows</span>
-        </Menu.Item>
+        <Menu.SubMenu title={<div><Icon type="fire" /> Shows</div>} key="show-submenu">
+          <Menu.Item key="/shows" onClick={() => router.push('/shows')}>
+            <span className="nav-text">List</span>
+          </Menu.Item>
+          <Menu.Item key="/shows/create" onClick={() => router.push('/shows/create')}>
+            <span className="nav-text">Create</span>
+          </Menu.Item>
+          <Menu.Item key="/shows/history" onClick={() => router.push('/shows/history')}>
+            <span className="nav-text">History</span>
+          </Menu.Item>
+        </Menu.SubMenu>
 
         <Menu.Item key="/settings" onClick={() => router.push('/settings')}>
-            <span className="nav-text"><Icon type="control" /> Settings</span>
+          <span className="nav-text"><Icon type="control" /> Settings</span>
         </Menu.Item>
       </Menu>
     </Sider>
