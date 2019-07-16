@@ -18,13 +18,14 @@
   "scripts": {
     "dev": "node nextron/nextron.js",
     "build": "node nextron/nextron.js build",
+    "build:mac": "nextron build --mac --x64",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
     "antd": "^3.19.2",
     "axios": "^0.19.0",
     "electron-serve": "^0.3.0",
-    "electron-store": "^3.3.0",
+    "electron-store": "^4.0.0",
     "faker": "^4.1.0",
     "mobx": "^5.11.0",
     "mobx-react": "^6.1.1",
