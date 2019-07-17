@@ -22,6 +22,17 @@ class ShowStore {
     this.shows = showsData || [];
     this.isLoading = false;
   }
+
+  createShow(showData) {
+    this.transportLayer
+      .createShow(showData)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  }
 }
 
 export default decorate(ShowStore, {
@@ -29,4 +40,5 @@ export default decorate(ShowStore, {
   shows: observable,
   updateShows: action.bound,
   loadShows: action.bound,
+  createShow: action.bound,
 });
