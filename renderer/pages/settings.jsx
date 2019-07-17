@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { Form, Input } from 'antd';
 import PageContent from '../components/PageContent';
 
 const settings = () => {
@@ -9,7 +10,11 @@ const settings = () => {
         <title>CAPI Desktop - Settings</title>
       </Head>
 
-      Settings
+      <Form>
+        <Form.Item label="API Token">
+          <Input />
+        </Form.Item>
+      </Form>
     </PageContent>
   );
 };
