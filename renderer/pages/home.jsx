@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Head from 'next/head';
-import { Card, Icon } from 'antd';
+import { Card, Icon, Avatar, Divider } from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -12,18 +12,59 @@ const Grid = styled.div`
   grid-gap: 15px;
 `;
 
-export default () => (
-  <PageContent header="Welcome" subtitle="What would you like to do?" hideFooter={true} hideContentWrapper={true}>
-    <Head>
-      <title>CAPI Desktop - Home</title>
-    </Head>
+const EntityCardLayout = styled.span`
+  display: grid;
+  grid-gap: 15px;
+  grid-auto-flow: column;
+`;
 
-    <Grid>
-      <Card size="small" title={<h4><Icon type="fire" /> Shows</h4>} style={{ width: 300 }}>
-        <div><Link href="/shows"><a><Icon type="unordered-list" /> Shows List</a></Link></div>
-        <div><Link href="/shows/create"><a><Icon type="plus" /> Create new</a></Link></div>
-        <div><Link href="/shows/history"><a><Icon type="history" /> History</a></Link></div>
-      </Card>
-    </Grid>
-  </PageContent >
-);
+const CardLink = styled(Card)`
+  display: grid;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+
+  a {
+    color: initial;
+  }
+
+  &:hover {
+    color: red;
+  }
+`;
+
+class Home extends Component {
+  render() {
+    return (
+      <PageContent header="Welcome" subtitle="What would you like to do?" hideFooter={true} hideContentWrapper={true}>
+        <Head>
+          <title>CAPI Desktop - Home</title>
+        </Head>
+
+        <Grid>
+          <Card size="small" title={<h4><Icon type="fire" /> Shows</h4>}>
+            <EntityCardLayout>
+              <CardLink onMouseEnter={() => console.log('onMouseOver')} onMouseLeave={() => console.log('onMouseLeave')}>
+                <Avatar icon="read" size="large" />
+                <Divider />
+                <Link href="/shows"><a>Shows List</a></Link>
+              </CardLink>
+              <CardLink>
+                <Avatar icon="folder-add" size="large" />
+                <Divider />
+                <Link href="/shows/create"><a>Create New</a></Link>
+              </CardLink>
+              <CardLink>
+                <Avatar icon="heart" size="large" />
+                <Divider />
+                <Link href="/shows/history"><a>Favourites</a></Link>
+              </CardLink>
+            </EntityCardLayout>
+          </Card>
+        </Grid>
+      </PageContent >
+    );
+  }
+}
+
+export default Home;

@@ -6,9 +6,6 @@ import PageContent from '../../components/PageContent';
 
 class Create extends Component {
   static getInitialProps({ mobxStore }) {
-    console.log({ mobxStore });
-
-
     return {
       createShow: mobxStore.showStore.createShow,
     };
