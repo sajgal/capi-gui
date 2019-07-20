@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Card, Icon, Avatar, Divider } from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { observer } from "mobx-react"
 
 import PageContent from '../components/PageContent';
 
@@ -34,7 +35,16 @@ const CardLink = styled(Card)`
 `;
 
 class Home extends Component {
+  static getInitialProps({ mobxStore }) {
+    return {
+      homeHoverArea: mobxStore.uiStore.homeHoverArea,
+      setHomeHoverArea: mobxStore.uiStore.setHomeHoverArea,
+    };
+  }
+
   render() {
+    console.log(this.props.setHomeHoverArea);
+
     return (
       <PageContent header="Welcome" subtitle="What would you like to do?" hideFooter={true} hideContentWrapper={true}>
         <Head>
@@ -42,18 +52,21 @@ class Home extends Component {
         </Head>
 
         <Grid>
-          <Card size="small" title={<h4><Icon type="fire" /> Shows</h4>}>
+          <Card size="small" title={<h4><Icon type="fire" /> Shows, Hover area: {this.props.homeHoverArea ? this.props.homeHoverArea : "-"}</h4>}>
             <EntityCardLayout>
-              <CardLink onMouseEnter={() => console.log('onMouseOver')} onMouseLeave={() => console.log('onMouseLeave')}>
+              {/* <CardLink onMouseEnter={() => this.props.setHomeHoverArea('show-list')} onMouseLeave={() => this.props.setHomeHoverArea(null)}> */}
+              <CardLink>
                 <Avatar icon="read" size="large" />
                 <Divider />
                 <Link href="/shows"><a>Shows List</a></Link>
               </CardLink>
+              {/* <CardLink onMouseEnter={() => this.props.setHomeHoverArea('show-create')} onMouseLeave={() => this.props.setHomeHoverArea(null)}> */}
               <CardLink>
                 <Avatar icon="folder-add" size="large" />
                 <Divider />
                 <Link href="/shows/create"><a>Create New</a></Link>
               </CardLink>
+              {/* <CardLink onMouseEnter={() => this.props.setHomeHoverArea('show-history')} onMouseLeave={() => this.props.setHomeHoverArea(null)}> */}
               <CardLink>
                 <Avatar icon="heart" size="large" />
                 <Divider />
@@ -67,4 +80,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default observer(Home);
