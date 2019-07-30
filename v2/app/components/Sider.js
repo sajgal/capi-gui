@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Layout, Menu, Icon } from 'antd';
-import { withRouter } from 'next/router';
 
 const { Sider } = Layout;
 
@@ -12,7 +11,7 @@ const Logo = styled.div`
   font-style: italic;
 `;
 
-const SiderComponent = ({ router }) => {
+const SiderComponent = () => {
   return (
     <Sider breakpoint="md" collapsedWidth="0">
       <Logo>
@@ -23,27 +22,27 @@ const SiderComponent = ({ router }) => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={['/home']}
-        selectedKeys={[router.pathname]}
+        selectedKeys={[]}
         defaultOpenKeys={["show-submenu"]}
         forceSubMenuRender={true}
       >
-        <Menu.Item key="/home" onClick={() => router.push('/home')}>
+        <Menu.Item key="/home">
           <span className="nav-text"><Icon type="home" /> Home</span>
         </Menu.Item>
 
         <Menu.SubMenu title={<div><Icon type="fire" /> Shows</div>} key="show-submenu">
-          <Menu.Item key="/shows" onClick={() => router.push('/shows')}>
+          <Menu.Item key="/shows">
             <span className="nav-text">List</span>
           </Menu.Item>
-          <Menu.Item key="/shows/create" onClick={() => router.push('/shows/create')}>
+          <Menu.Item key="/shows/create">
             <span className="nav-text">Create</span>
           </Menu.Item>
-          <Menu.Item key="/shows/history" onClick={() => router.push('/shows/history')}>
+          <Menu.Item key="/shows/history">
             <span className="nav-text">History</span>
           </Menu.Item>
         </Menu.SubMenu>
 
-        <Menu.Item key="/settings" onClick={() => router.push('/settings')}>
+        <Menu.Item key="/settings">
           <span className="nav-text"><Icon type="control" /> Settings</span>
         </Menu.Item>
       </Menu>
@@ -51,4 +50,4 @@ const SiderComponent = ({ router }) => {
   );
 };
 
-export default withRouter(SiderComponent);
+export default SiderComponent;

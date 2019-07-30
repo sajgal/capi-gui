@@ -1,12 +1,11 @@
 import React from 'react';
 import { Layout, PageHeader, Icon } from 'antd';
-import { withRouter } from 'next/router';
 
 const { Footer, Content } = Layout;
 
 const PageContent = props => {
   return (
-    <>
+    <span>
       {
         props.header &&
         <PageHeader
@@ -28,8 +27,8 @@ const PageContent = props => {
         !props.hideFooter &&
         <Footer style={{ textAlign: 'center' }}>Switch Media ©2019 - With <Icon type="heart" /> from Sydney </Footer>
       }
-    </>
+    </span>
   );
 }
 
-export default withRouter(PageContent);
+export default PageContent;
