@@ -4,6 +4,7 @@ import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
 
 import HomePage from './containers/HomePage';
+import SettingsPage from './containers/SettingsPage'
 import Page from './components/Page';
 import RootStore from './stores/RootStore';
 
@@ -13,11 +14,12 @@ export default class App extends Component {
   render() {
     return (
       <Provider rootStore={new RootStore}>
-        <Page>
-          <HashRouter>
+        <HashRouter>
+          <Page>
             <Route exact path="/" component={HomePage} />
-          </HashRouter>
-        </Page>
+            <Route exact path="/settings" component={SettingsPage} />
+          </Page>
+        </HashRouter>
       </Provider>
     );
   }

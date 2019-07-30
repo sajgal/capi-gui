@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
 import Sider from '../components/Sider';
-
-const { Header, Content, Footer } = Layout;
 
 const LayoutFullHeight = styled(Layout)`
   height: 100vh;
@@ -24,7 +22,7 @@ class Page extends Component {
     return (
       <ThemeProvider theme={theme}>
         <LayoutFullHeight>
-          <Sider />
+          <Sider path={"/"} />
           <Layout>
             {this.props.children}
           </Layout>
