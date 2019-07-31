@@ -10,10 +10,12 @@ import RootStore from './stores/RootStore';
 
 configure({ enforceActions: "observed" });
 
+const store = new RootStore;
+
 export default class App extends Component {
   render() {
     return (
-      <Provider rootStore={new RootStore}>
+      <Provider {...store}>
         <HashRouter>
           <Page>
             <Route exact path="/" component={HomePage} />

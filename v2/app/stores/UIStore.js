@@ -4,10 +4,7 @@ class UIStore {
   homeHoverArea = null;
 
   setHomeHoverArea(area) {
-    console.log("setting area", area);
     this.homeHoverArea = area;
-    console.log('done');
-
   }
 }
 
