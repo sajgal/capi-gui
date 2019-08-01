@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
 import { Layout, Menu, Icon } from 'antd';
 import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
 const { Sider } = Layout;
 

@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import Head from 'next/head';
 import { Form, Input, Checkbox, DatePicker, Button, Icon } from 'antd';
+import { inject } from "mobx-react"
+import { Helmet } from "react-helmet";
+import React, { Component } from 'react';
 
 import PageContent from '../../components/PageContent';
 
 class Create extends Component {
-  static getInitialProps({ mobxStore }) {
-    return {
-      createShow: mobxStore.showStore.createShow,
-    };
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -25,9 +20,9 @@ class Create extends Component {
 
     return (
       <PageContent header="Show > Create">
-        <Head>
+        <Helmet>
           <title>CAPI Desktop - Create Show</title>
-        </Head>
+        </Helmet>
 
         <Form onSubmit={this.handleSubmit}>
           <Form.Item label="Title">
@@ -69,4 +64,8 @@ class Create extends Component {
   }
 }
 
-export default Form.create({ name: 'show_create' })(Create);
+export default inject(stores => {
+  return ({
+    createShow: stores.showStore.createShow,
+  })
+})(Form.create({ name: 'show_create' })(Create));

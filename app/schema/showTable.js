@@ -1,4 +1,5 @@
 import { Icon } from 'antd';
+import React from 'react';
 
 const trueIcon = <Icon type="check-circle" theme="twoTone" twoToneColor="#9AE19D" />;
 const falseIcon = <Icon type="close-circle" theme="twoTone" twoToneColor="#EFECEA" />;

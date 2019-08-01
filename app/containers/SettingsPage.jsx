@@ -1,14 +1,14 @@
 import React from 'react';
-import Head from 'next/head';
+import { Helmet } from "react-helmet";
 import { Form, Input } from 'antd';
 import PageContent from '../components/PageContent';
 
 const settings = () => {
   return (
     <PageContent header="Settings">
-      <Head>
+      <Helmet>
         <title>CAPI Desktop - Settings</title>
-      </Head>
+      </Helmet>
 
       <Form>
         <Form.Item label="API Token">

@@ -1,7 +1,6 @@
 node_modules
-*.log
-.next
-/app
+.DS_Store
 dist
+build
 .history
-renderer/out
+*.log

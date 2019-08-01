@@ -1,14 +1,13 @@
 import React from 'react';
-import Head from 'next/head';
-import { Layout, Card, Icon } from 'antd';
+import { Helmet } from "react-helmet";
 
 import PageContent from '../../components/PageContent';
 
 export default () => (
   <PageContent header="Show > History">
-    <Head>
+    <Helmet>
       <title>CAPI Desktop - Show History</title>
-    </Head>
+    </Helmet>
 
     History
   </PageContent >
