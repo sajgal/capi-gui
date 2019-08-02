@@ -1,10 +1,10 @@
-import { Card, Icon, Avatar, Divider } from 'antd';
+import { Card, Icon } from 'antd';
 import { Helmet } from "react-helmet";
 import { inject } from "mobx-react"
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import DashboardCard from '../components/DashboardCard';
 import PageContent from '../components/PageContent';
 
 const Grid = styled.div`
@@ -17,20 +17,9 @@ const EntityCardLayout = styled.span`
   display: grid;
   grid-gap: 15px;
   grid-auto-flow: column;
-`;
 
-const CardLink = styled(Card)`
-  display: grid;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-
-  a {
-    color: initial;
-  }
-
-  &:hover {
-    color: red;
+  @media (max-width: 700px) {
+    grid-auto-flow: row;
   }
 `;
 
@@ -43,23 +32,31 @@ class Home extends Component {
         </Helmet>
 
         <Grid>
-          <Card size="small" title={<h4><Icon type="fire" /> Shows, Hover area: {this.props.homeHoverArea ? this.props.homeHoverArea : "-"}</h4>}>
+          <Card size="small" title={<h4><Icon type="fire" />Shows</h4>}>
             <EntityCardLayout>
-              <CardLink onMouseEnter={() => this.props.setHomeHoverArea('show-list')} onMouseLeave={() => this.props.setHomeHoverArea(null)}>
-                <Avatar icon="read" size="large" />
-                <Divider />
-                <Link to="/shows">Shows List</Link>
-              </CardLink>
-              <CardLink onMouseEnter={() => this.props.setHomeHoverArea('show-create')} onMouseLeave={() => this.props.setHomeHoverArea(null)}>
-                <Avatar icon="folder-add" size="large" />
-                <Divider />
-                <Link to="/shows/create">Create New</Link>
-              </CardLink>
-              <CardLink onMouseEnter={() => this.props.setHomeHoverArea('show-history')} onMouseLeave={() => this.props.setHomeHoverArea(null)}>
-                <Avatar icon="heart" size="large" />
-                <Divider />
-                <Link to="/shows/history">Favourites</Link>
-              </CardLink>
+              <DashboardCard
+                setHomeHoverArea={this.props.setHomeHoverArea}
+                cardId={'show-list'}
+                link={'/shows'}
+                label={'Shows List'}
+                icon={'read'}
+                homeHoverArea={this.props.homeHoverArea} />
+
+              <DashboardCard
+                setHomeHoverArea={this.props.setHomeHoverArea}
+                cardId={'show-create'}
+                link={'/shows/create'}
+                label={'Create New'}
+                icon={'folder-add'}
+                homeHoverArea={this.props.homeHoverArea} />
+
+              <DashboardCard
+                setHomeHoverArea={this.props.setHomeHoverArea}
+                cardId={'show-history'}
+                link={'/shows/history'}
+                label={'Favourites'}
+                icon={'heart'}
+                homeHoverArea={this.props.homeHoverArea} />
             </EntityCardLayout>
           </Card>
         </Grid>
