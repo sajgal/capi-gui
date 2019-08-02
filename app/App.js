@@ -3,13 +3,13 @@ import { HashRouter, Route } from 'react-router-dom';
 import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
 
-import HomePage from './containers/HomePage';
+import HomePage from './pages/HomePage';
 import Page from './components/Page';
 import RootStore from './stores/RootStore';
-import SettingsPage from './containers/SettingsPage'
-import ShowsCreate from './containers/shows/create';
-import ShowsHistory from './containers/shows/history';
-import ShowsList from './containers/shows';
+import SettingsPage from './pages/SettingsPage'
+import ShowsCreate from './pages/shows/create';
+import ShowsHistory from './pages/shows/history';
+import ShowsList from './pages/shows';
 
 configure({ enforceActions: "observed" });
 

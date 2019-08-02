@@ -1,4 +1,4 @@
-import { observable, decorate, action } from 'mobx';
+import { decorate, action } from 'mobx';
 
 class SettingsStore {
   electronStore;
