@@ -25,7 +25,7 @@ const PageContent = props => {
 
       {
         !props.hideFooter &&
-        <Footer style={{ textAlign: 'center' }}>Switch Media ©2019 - With <Icon type="heart" /> from Sydney </Footer>
+        <Footer style={{ textAlign: 'center' }}>Switch Media ©2019 - From Sydney With <Icon type="heart" /></Footer>
       }
     </span>
   );
