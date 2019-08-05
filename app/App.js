@@ -12,7 +12,6 @@ import ShowsHistory from './pages/shows/history';
 import ShowsList from './pages/shows';
 
 configure({ enforceActions: "observed" });
-
 const store = new RootStore;
 
 export default class App extends Component {

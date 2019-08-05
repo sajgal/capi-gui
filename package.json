@@ -79,6 +79,7 @@
         "jest-enzyme": "6.0.0",
         "mobx": "^5.11.0",
         "mobx-react": "^6.1.1",
+        "nedb": "^1.8.0",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "react-helmet": "^5.2.1",

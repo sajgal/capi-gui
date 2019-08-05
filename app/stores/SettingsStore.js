@@ -1,19 +1,32 @@
 import { decorate, action } from 'mobx';
 
 class SettingsStore {
-  electronStore;
-  apiTokenLabel = 'settings-api-token';
+  datastore;
+  apiTokenKey = 'settings-api-token';
 
-  constructor(electronStore) {
-    this.electronStore = electronStore;
+  constructor(datastore) {
+    this.datastore = datastore;
   }
 
   setToken(token) {
-    this.electronStore.set(this.apiTokenLabel, token);
+    const doc = {
+      key: this.apiTokenKey,
+      value: token,
+    }
+
+    this.datastore.insert(doc, function (err) {
+      console.log('something horrible has happened', err);
+    });
   }
 
   getToken() {
-    return this.electronStore.get(this.apiTokenLabel);
+    return this.datastore.find({ key: this.apiTokenKey }, function (err, docs) {
+      if( err ) {
+        console.log('something horrible has happened', err);
+      }
+
+      return docs;
+    });
   }
 }
 
