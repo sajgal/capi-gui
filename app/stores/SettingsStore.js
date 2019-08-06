@@ -14,16 +14,14 @@ class SettingsStore {
       value: token,
     }
 
-    this.datastore.insert(doc, function (err) {
-      console.log('something horrible has happened', err);
+    this.datastore.insert(doc, function (err, newDoc) {
+      console.log('Inserted', newDoc.key, 'with ID', newDoc._id);
     });
   }
 
   getToken() {
     return this.datastore.find({ key: this.apiTokenKey }, function (err, docs) {
-      if( err ) {
-        console.log('something horrible has happened', err);
-      }
+      console.log('docs', docs);
 
       return docs;
     });
