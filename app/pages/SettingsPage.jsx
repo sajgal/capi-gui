@@ -7,7 +7,7 @@ import PageContent from '../components/PageContent';
 
 class SettingsPage extends React.Component {
   componentDidMount() {
-    console.log('mounted!', this.props.getToken());
+    this.props.loadToken();
   }
 
   render() {
@@ -19,7 +19,9 @@ class SettingsPage extends React.Component {
 
         <Form>
           <Form.Item label="API Token">
-            <Input onChange={(e) => this.props.setToken(e.target.value)} />
+            <Input
+              onChange={(e) => this.props.saveToken(e.target.value)}
+              value={this.props.settings.token} />
           </Form.Item>
         </Form>
       </PageContent>
@@ -29,7 +31,8 @@ class SettingsPage extends React.Component {
 
 export default inject(stores => {
   return ({
-    setToken: stores.settingsStore.setToken,
-    getToken: stores.settingsStore.setToken,
+    saveToken: stores.settingsStore.saveToken,
+    loadToken: stores.settingsStore.loadToken,
+    settings: stores.settingsStore.settings,
   })
 })(SettingsPage);

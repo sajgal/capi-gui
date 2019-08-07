@@ -1,34 +1,52 @@
-import { decorate, action } from 'mobx';
+import { decorate, action, observable } from 'mobx';
 
 class SettingsStore {
   datastore;
   apiTokenKey = 'settings-api-token';
+  settings = {};
 
   constructor(datastore) {
     this.datastore = datastore;
   }
 
-  setToken(token) {
+  saveToken(token) {
     const doc = {
       key: this.apiTokenKey,
       value: token,
     }
 
-    this.datastore.insert(doc, function (err, newDoc) {
-      console.log('Inserted', newDoc.key, 'with ID', newDoc._id);
+    this.datastore.update({ key: this.apiTokenKey }, doc, { upsert: true }, newDoc => {
+      this.setToken(token);
     });
   }
 
-  getToken() {
-    return this.datastore.find({ key: this.apiTokenKey }, function (err, docs) {
-      console.log('docs', docs);
+  loadToken() {
+    const promise = new Promise((resolve, reject) => {
+      this.datastore.findOne({ key: this.apiTokenKey }, function (err, doc) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(doc.value)
+        }
+      })
+    })
 
-      return docs;
-    });
+    return promise.then(token => {
+      this.setToken(token);
+    })
+  }
+
+  setToken(token) {
+    this.settings = {
+      ...this.settings,
+      token
+    }
   }
 }
 
 export default decorate(SettingsStore, {
+  settings: observable,
   setToken: action.bound,
-  getToken: action.bound,
+  saveToken: action.bound,
+  loadToken: action.bound,
 });
