@@ -19,9 +19,11 @@ class SettingsPage extends React.Component {
 
         <Form>
           <Form.Item label="API Token">
-            <Input
-              onChange={(e) => this.props.saveToken(e.target.value)}
-              value={this.props.settings.token} />
+            {this.props.settings.token &&
+              <Input
+                onChange={(e) => this.props.saveToken(e.target.value)}
+                defaultValue={this.props.settings.token} />
+            }
           </Form.Item>
         </Form>
       </PageContent>
