@@ -3,8 +3,11 @@ import { findOnePromise } from '../helpers/NedbPromiseLayer'
 
 class SettingsStore {
   datastore;
-  apiTokenKey = 'settings-api-token';
   settings = {};
+  settingsKeys = [
+    'settings-api-token',
+    'settings-endpoint-token',
+  ]
 
   constructor(datastore) {
     this.datastore = datastore;
