@@ -6,10 +6,6 @@ import React from 'react';
 import PageContent from '../components/PageContent';
 
 class SettingsPage extends React.Component {
-  componentDidMount() {
-    this.props.loadToken();
-  }
-
   render() {
     return (
       <PageContent header="Settings">
@@ -34,7 +30,6 @@ class SettingsPage extends React.Component {
 export default inject(stores => {
   return ({
     saveToken: stores.settingsStore.saveToken,
-    loadToken: stores.settingsStore.loadToken,
     settings: stores.settingsStore.settings,
   })
 })(SettingsPage);

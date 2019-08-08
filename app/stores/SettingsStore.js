@@ -1,4 +1,5 @@
 import { decorate, action, observable } from 'mobx';
+import { findOnePromise } from '../helpers/NedbPromiseLayer'
 
 class SettingsStore {
   datastore;
@@ -7,6 +8,7 @@ class SettingsStore {
 
   constructor(datastore) {
     this.datastore = datastore;
+    this.loadToken();
   }
 
   saveToken(token) {
@@ -21,19 +23,10 @@ class SettingsStore {
   }
 
   loadToken() {
-    const promise = new Promise((resolve, reject) => {
-      this.datastore.findOne({ key: this.apiTokenKey }, function (err, doc) {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(doc.value)
-        }
+    return findOnePromise(this.datastore, { key: this.apiTokenKey })
+      .then(doc => {
+        this.setToken(doc.value);
       })
-    })
-
-    return promise.then(token => {
-      this.setToken(token);
-    })
   }
 
   setToken(token) {
@@ -48,5 +41,4 @@ export default decorate(SettingsStore, {
   settings: observable,
   setToken: action.bound,
   saveToken: action.bound,
-  loadToken: action.bound,
 });
