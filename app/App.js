@@ -3,10 +3,10 @@ import { HashRouter, Route } from 'react-router-dom';
 import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
 
-import HomePage from './pages/HomePage';
+import HomePage from './pages/home';
 import Page from './components/Page';
 import RootStore from './stores/RootStore';
-import SettingsPage from './pages/SettingsPage'
+import SettingsPage from './pages/settings'
 import ShowsCreate from './pages/shows/create';
 import ShowsHistory from './pages/shows/history';
 import ShowsList from './pages/shows';
