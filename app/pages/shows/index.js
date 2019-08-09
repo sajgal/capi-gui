@@ -15,10 +15,6 @@ const StyledTable = styled(Table)`
 
 class Shows extends React.Component {
   componentDidMount() {
-    // if (this.props.showStore.shows.length === 0) {
-    //   this.props.showStore.loadShows();
-    // }
-
     this.props.loadShows();
   }
 

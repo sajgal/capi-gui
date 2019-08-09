@@ -1,5 +1,5 @@
 import { decorate, action, observable } from 'mobx';
-import { findOnePromise } from '../helpers/NedbPromiseLayer'
+import { find } from '../helpers/NedbPromiseLayer'
 
 class SettingsStore {
   datastore;
@@ -11,37 +11,37 @@ class SettingsStore {
 
   constructor(datastore) {
     this.datastore = datastore;
-    this.loadToken();
+    this.load();
   }
 
-  saveToken(token) {
+  save(key, setting) {
     const doc = {
-      key: this.apiTokenKey,
-      value: token,
+      key,
+      value: setting,
     }
 
-    this.datastore.update({ key: this.apiTokenKey }, doc, { upsert: true }, newDoc => {
-      this.setToken(token);
+    this.datastore.update({ key }, doc, { upsert: true }, newDoc => {
+      this.setToken(key, setting);
     });
   }
 
-  loadToken() {
-    return findOnePromise(this.datastore, { key: this.apiTokenKey })
-      .then(doc => {
-        this.setToken(doc.value);
+  load() {
+    return find(this.datastore, { key: { $in: this.settingsKeys} })
+      .then(docs => {
+        docs.forEach(doc => {
+          this.setToken(doc.key, doc.value);
+        });
       })
   }
 
-  setToken(token) {
-    this.settings = {
-      ...this.settings,
-      token
-    }
+  setToken(key, setting) {
+    this.settings[key] = setting;
   }
 }
 
 export default decorate(SettingsStore, {
   settings: observable,
+  settingsKeys: observable,
   setToken: action.bound,
-  saveToken: action.bound,
+  save: action.bound,
 });
