@@ -27,9 +27,8 @@ class SettingsPage extends React.Component {
         </Helmet>
 
         <Form>
-          {this.props.settings &&
-            settingsInputs
-          }
+          {this.props.token &&
+            settingsInputs}
         </Form>
       </PageContent>
     );
@@ -40,6 +39,8 @@ export default inject(stores => {
   return ({
     save: stores.settingsStore.save,
     settings: stores.settingsStore.settings,
+    token: stores.settingsStore.settings['settings-api-token'],
     settingsKeys: stores.settingsStore.settingsKeys,
+    load: stores.settingsStore.load,
   })
 })(SettingsPage);
