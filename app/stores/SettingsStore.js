@@ -5,7 +5,7 @@ class SettingsStore {
   datastore;
   settings = {};
   settingsKeys = [
-    'settings-endpoint-token',
+    'settings-api-endpoint',
     'settings-api-token',
   ]
 

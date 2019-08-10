@@ -1,17 +1,16 @@
 import axios from 'axios';
-import { CAPI_BASE_URL, CAPI_TOKEN } from '../../helpers/config';
 
 class ShowTransportLayer {
-  fetchShows() {
-    const url = `${CAPI_BASE_URL}/shows`;
+  fetchShows(endpoint) {
+    const url = `${endpoint}/content/v1/shows`;
 
     return axios.get(url);
   }
 
-  createShow(data) {
-    const url = `${CAPI_BASE_URL}/shows`;
+  createShow(endpoint, token, data) {
+    const url = `${endpoint}/content/v1/shows`;
     const config = {
-      headers: { 'Authorization': `bearer ${CAPI_TOKEN}` }
+      headers: { 'Authorization': `bearer ${token}` }
     };
 
     return axios.post(url, { data }, config);

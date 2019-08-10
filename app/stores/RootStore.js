@@ -15,8 +15,8 @@ class RootStore {
       autoload: true
     })
 
-    this.showStore = new ShowStore(new ShowTransportLayer());
     this.settingsStore = new SettingsStore(datastore);
+    this.showStore = new ShowStore(new ShowTransportLayer());
     this.uiStore = new UIStore();
   }
 }

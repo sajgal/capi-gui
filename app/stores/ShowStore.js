@@ -3,16 +3,17 @@ import { observable, decorate, action } from 'mobx';
 class ShowStore {
   transportLayer;
   isLoading = false;
+  storeNotLoaded = true;
   shows = [];
 
   constructor(transportLayer) {
     this.transportLayer = transportLayer;
   }
 
-  loadShows() {
+  loadShows(endpoint) {
     this.isLoading = true;
     this.transportLayer
-      .fetchShows()
+      .fetchShows(endpoint)
       .then(response => {
         this.updateShows(response.data.data);
       });
@@ -21,11 +22,12 @@ class ShowStore {
   updateShows(showsData) {
     this.shows = showsData || [];
     this.isLoading = false;
+    this.storeNotLoaded = false;
   }
 
-  createShow(showData) {
+  createShow(endpoint, token, showData) {
     this.transportLayer
-      .createShow(showData)
+      .createShow(endpoint, token, showData)
       .then(response => {
         console.log(response);
       })
@@ -38,6 +40,7 @@ class ShowStore {
 export default decorate(ShowStore, {
   isLoading: observable,
   shows: observable,
+  storeNotLoaded: observable,
   updateShows: action.bound,
   loadShows: action.bound,
   createShow: action.bound,

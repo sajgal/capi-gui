@@ -9,7 +9,7 @@ class SettingsPage extends React.Component {
   render() {
     const keyToLabel = {
       'settings-api-token': 'Bearer Token',
-      'settings-endpoint-token': 'API Endpoint',
+      'settings-api-endpoint': 'API Endpoint',
     }
 
     const settingsInputs = this.props.settingsKeys.map(key => {
