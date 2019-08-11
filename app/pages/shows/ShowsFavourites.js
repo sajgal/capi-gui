@@ -9,6 +9,6 @@ export default () => (
       <title>CAPI Desktop - Show History</title>
     </Helmet>
 
-    History
+    Favourites
   </PageContent >
 );

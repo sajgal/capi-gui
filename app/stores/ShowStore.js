@@ -26,14 +26,7 @@ class ShowStore {
   }
 
   createShow(endpoint, token, showData) {
-    this.transportLayer
-      .createShow(endpoint, token, showData)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
+    return this.transportLayer.createShow(endpoint, token, showData);
   }
 }
 

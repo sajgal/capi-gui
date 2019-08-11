@@ -10,7 +10,7 @@ class ShowTransportLayer {
   createShow(endpoint, token, data) {
     const url = `${endpoint}/content/v1/shows`;
     const config = {
-      headers: { 'Authorization': `bearer ${token}` }
+      headers: { 'Authorization': `Bearer ${token}` }
     };
 
     return axios.post(url, { data }, config);
