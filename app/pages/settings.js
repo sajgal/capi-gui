@@ -12,11 +12,16 @@ class SettingsPage extends React.Component {
       'settings-api-endpoint': 'API Endpoint',
     }
 
+    const keyInputType = {
+      'settings-api-token': 'password',
+    }
+
     const settingsInputs = this.props.settingsKeys.map(key => {
       return <Form.Item label={keyToLabel[key] || key} key={key}>
         <Input
           onChange={(e) => this.props.save(key, e.target.value)}
-          defaultValue={this.props.settings[key]} />
+          defaultValue={this.props.settings[key]}
+          type={keyInputType[key] || 'text'} />
       </Form.Item>
     });
 
