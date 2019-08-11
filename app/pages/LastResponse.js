@@ -1,3 +1,4 @@
+import { Empty, List, Tag, Button, Icon, Divider, Row, Col } from 'antd';
 import { Helmet } from "react-helmet";
 import { inject } from 'mobx-react';
 import React from 'react';
@@ -6,20 +7,46 @@ import PageContent from '../components/PageContent';
 
 class LastResponsePage extends React.Component {
   render() {
-    let lastResponse = <div>No previous response</div>;
+    let lastResponse = <Empty />;
 
     if (this.props.response) {
       const { status, statusText, response, entityType } = this.props.response;
       const responseFields = [];
 
       for (let [key, value] of Object.entries(response.data)) {
-        responseFields.push(<div key={key}>{key}: {value}</div>);
+        responseFields.push(`${key}: ${value}`);
       }
 
       lastResponse = <div>
-        <div>Status: {status} - {statusText}</div>
-        <div>Entity: {entityType}</div>
-        {responseFields}
+        <List
+          size="small"
+          header={<Tag color="#87d068">{status} - {entityType} {statusText}</Tag>}
+          bordered
+          dataSource={responseFields}
+          renderItem={item => <List.Item>{item}</List.Item>}
+        />
+
+        <Divider dashed />
+
+        <Row type="flex" justify="end">
+          <Col>
+            <Button.Group size="default">
+              <Button type="default">
+                <Icon type="star" />
+                Save as Favourite
+              </Button>
+              <Button type="default">
+                <Icon type="edit" />
+                Update {entityType}
+              </Button>
+              <Button type="danger">
+                <Icon type="delete" />
+                Delete
+              </Button>
+            </Button.Group>
+          </Col>
+        </Row>
+
       </div>
     }
 
