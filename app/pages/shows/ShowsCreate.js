@@ -13,8 +13,6 @@ class Create extends Component {
         const responsePromise = this.props.createShow(this.props.endpoint, this.props.token, values);
         responsePromise
           .then(response => {
-            console.log(response);
-
             // Set the response to UI Store
             this.props.setLastResponse(
               response.status,
