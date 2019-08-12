@@ -5,8 +5,8 @@ class SettingsStore {
   datastore;
   settings = {};
   settingsKeys = [
+    'settings-api-endpoint',
     'settings-api-token',
-    'settings-endpoint-token',
   ]
 
   constructor(datastore) {
@@ -44,4 +44,5 @@ export default decorate(SettingsStore, {
   settingsKeys: observable,
   setToken: action.bound,
   save: action.bound,
+  load: action.bound,
 });

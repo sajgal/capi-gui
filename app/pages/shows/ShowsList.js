@@ -15,7 +15,17 @@ const StyledTable = styled(Table)`
 
 class Shows extends React.Component {
   componentDidMount() {
-    this.props.loadShows();
+    this.loadShows();
+  }
+
+  componentDidUpdate() {
+    this.loadShows();
+  }
+
+  loadShows() {
+    if (this.props.endpoint && this.props.storeNotLoaded) {
+      this.props.loadShows(this.props.endpoint);
+    }
   }
 
   render() {
@@ -26,7 +36,7 @@ class Shows extends React.Component {
         </Helmet>
 
         {
-          this.props.isLoading ?
+          this.props.isLoading || this.props.storeNotLoaded ?
             <Icon type="loading" /> :
             <StyledTable rowKey="id" columns={SHOW_TABLE_SCHEMA} dataSource={this.props.shows} size="middle" bordered={true} />
         }
@@ -40,5 +50,7 @@ export default inject(stores => {
     loadShows: stores.showStore.loadShows,
     shows: stores.showStore.shows,
     isLoading: stores.showStore.isLoading,
+    storeNotLoaded: stores.showStore.storeNotLoaded,
+    endpoint: stores.settingsStore.settings['settings-api-endpoint'],
   })
 })(Shows);

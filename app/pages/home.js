@@ -52,8 +52,8 @@ class Home extends Component {
 
               <DashboardCard
                 setHomeHoverArea={this.props.setHomeHoverArea}
-                cardId={'show-history'}
-                link={'/shows/history'}
+                cardId={'favourites'}
+                link={'/favourites'}
                 label={'Favourites'}
                 icon={'heart'}
                 homeHoverArea={this.props.homeHoverArea} />

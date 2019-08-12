@@ -40,10 +40,11 @@ class SiderComponent extends Component {
               <Menu.Item key="/shows/create" onClick={() => history.push('/shows/create')}>
                 <span className="nav-text">Create</span>
               </Menu.Item>
-              <Menu.Item key="/shows/history" onClick={() => history.push('/shows/history')}>
-                <span className="nav-text">History</span>
-              </Menu.Item>
             </Menu.SubMenu>
+
+            <Menu.Item key="/favourites" onClick={() => history.push('/favourites')}>
+              <span className="nav-text"><Icon type="star" /> Favourites</span>
+            </Menu.Item>
 
             <Menu.Item key="/settings" onClick={() => history.push('/settings')}>
               <span className="nav-text"><Icon type="control" /> Settings</span>

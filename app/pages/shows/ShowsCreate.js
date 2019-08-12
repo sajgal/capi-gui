@@ -10,7 +10,23 @@ class Create extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.createShow(values);
+        const responsePromise = this.props.createShow(this.props.endpoint, this.props.token, values);
+        responsePromise
+          .then(response => {
+            // Set the response to UI Store
+            this.props.setLastResponse(
+              response.status,
+              response.statusText,
+              response.data,
+              'show'
+            );
+
+            // Redirect to response page
+            this.props.history.push("/last-response");
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     });
   };
@@ -67,5 +83,8 @@ class Create extends Component {
 export default inject(stores => {
   return ({
     createShow: stores.showStore.createShow,
+    token: stores.settingsStore.settings['settings-api-token'],
+    endpoint: stores.settingsStore.settings['settings-api-endpoint'],
+    setLastResponse: stores.uiStore.setLastResponse,
   })
 })(Form.create({ name: 'show_create' })(Create));
