@@ -1,4 +1,4 @@
-import { Empty, List, Tag, Button, Icon, Divider, Row, Col } from 'antd';
+import { Empty, List, Tag, Button, Icon, Divider, Row, Col, notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { inject } from 'mobx-react';
 import React from 'react';
@@ -6,6 +6,29 @@ import React from 'react';
 import PageContent from '../components/PageContent';
 
 class LastResponsePage extends React.Component {
+  onFavouriteClick(entityType, entityId, title) {
+    this.props.saveFavourite(entityType, entityId, title)
+      .then(response => {
+        const btn = (
+          <Button type="primary" size="small" onClick={() => this.props.history.push("/favourites")}>
+            Show Favourites
+          </Button>
+        );
+
+        notification["success"]({
+          message: 'Successfuly added to favourites',
+          description: `${entityType}: ${title} added to favourites.`,
+          btn,
+        });
+      })
+      .catch(error => {
+        notification["error"]({
+          message: 'Could not add to favourites',
+          description: error,
+        });
+      });
+  }
+
   render() {
     let lastResponse = <Empty />;
 
@@ -31,7 +54,7 @@ class LastResponsePage extends React.Component {
         <Row type="flex" justify="end">
           <Col>
             <Button.Group size="default">
-              <Button type="default">
+              <Button type="default" onClick={() => this.onFavouriteClick(entityType, response.data.id, response.data.title)}>
                 <Icon type="star" />
                 Save as Favourite
               </Button>
@@ -65,5 +88,6 @@ class LastResponsePage extends React.Component {
 export default inject(stores => {
   return ({
     response: stores.uiStore.lastResponse,
+    saveFavourite: stores.favouritesStore.save,
   })
 })(LastResponsePage);
