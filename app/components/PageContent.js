@@ -1,19 +1,27 @@
-import React from 'react';
 import { Layout, PageHeader, Icon } from 'antd';
+import { withRouter } from "react-router-dom";
+import React from 'react';
 
 const { Footer, Content } = Layout;
 
 const PageContent = props => {
-  return (
-    <span>
-      {
-        props.header &&
+  let TopHeader = <span />;
+
+  if(props.header) {
+    TopHeader = withRouter(({history, location}) => {
+      return (
         <PageHeader
           title={props.header}
           subTitle={props.subtitle || ""}
-        // onBack={() => props.router.push('/home')}
+          onBack={props.hideBack ? undefined : () => history.push(props.back || '/')}
         />
-      }
+      );
+    })
+  }
+
+  return (
+    <span>
+      <TopHeader />
 
       {
         props.hideContentWrapper ?

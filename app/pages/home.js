@@ -26,7 +26,7 @@ const EntityCardLayout = styled.span`
 class Home extends Component {
   render() {
     return (
-      <PageContent header="Welcome" subtitle="What would you like to do?" hideFooter={true} hideContentWrapper={true}>
+      <PageContent header="Welcome" subtitle="What would you like to do?" hideBack={true} hideFooter={true} hideContentWrapper={true}>
         <Helmet>
           <title>CAPI Desktop - Home</title>
         </Helmet>
