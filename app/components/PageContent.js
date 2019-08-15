@@ -7,8 +7,8 @@ const { Footer, Content } = Layout;
 const PageContent = props => {
   let TopHeader = <span />;
 
-  if(props.header) {
-    TopHeader = withRouter(({history, location}) => {
+  if (props.header) {
+    TopHeader = withRouter(({ history }) => {
       return (
         <PageHeader
           title={props.header}
