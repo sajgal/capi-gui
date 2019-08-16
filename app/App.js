@@ -9,6 +9,7 @@ import RootStore from './stores/RootStore';
 import SettingsPage from './pages/Settings'
 import LastResponsePage from './pages/LastResponse'
 import ShowsCreate from './pages/shows/ShowsCreate';
+import ShowsUpdate from './pages/shows/ShowsUpdate';
 import Favourites from './pages/Favourites';
 import ShowsList from './pages/shows/ShowsList';
 
@@ -25,6 +26,7 @@ export default class App extends Component {
             <Route exact path="/settings" component={SettingsPage} />
             <Route exact path="/shows" component={ShowsList} />
             <Route exact path="/shows/create" component={ShowsCreate} />
+            <Route exact path="/shows/update" component={ShowsUpdate} />
             <Route exact path="/favourites" component={Favourites} />
             <Route exact path="/last-response" component={LastResponsePage} />
           </Page>
