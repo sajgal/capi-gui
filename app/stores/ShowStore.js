@@ -28,6 +28,10 @@ class ShowStore {
   createShow(endpoint, token, showData) {
     return this.transportLayer.createShow(endpoint, token, showData);
   }
+
+  getShowById(endpoint, showUUID) {
+    return this.transportLayer.getShow(endpoint, showUUID);
+  }
 }
 
 export default decorate(ShowStore, {
@@ -37,4 +41,5 @@ export default decorate(ShowStore, {
   updateShows: action.bound,
   loadShows: action.bound,
   createShow: action.bound,
+  getShowById: action.bound,
 });

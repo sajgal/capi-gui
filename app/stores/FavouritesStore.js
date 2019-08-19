@@ -1,5 +1,5 @@
 import { observable, decorate, action, computed } from 'mobx';
-import { upsert, findAndSort } from '../helpers/NedbPromiseLayer'
+import { upsert, findAndSort, remove } from '../helpers/NedbPromiseLayer'
 
 class FavouritesStore {
   favourites = [];
@@ -27,11 +27,20 @@ class FavouritesStore {
     this.favourites = favourites;
   }
 
+  remove(entityType, entityId) {
+    remove(this.favouritesDataStore, entityType, entityId)
+      .then(() => {
+        const remainingFavourites = this.favourites.filter(doc => doc.entityId !== entityId);
+        this.set(remainingFavourites);
+      })
+      .catch(err => console.log(err))
+  }
+
   get sortedFavourites() {
     let sortedFavourites = {};
 
     this.favourites.forEach(doc => {
-      if(sortedFavourites[doc.entityType] === undefined) {
+      if (sortedFavourites[doc.entityType] === undefined) {
         sortedFavourites[doc.entityType] = [];
       }
 
@@ -47,5 +56,6 @@ export default decorate(FavouritesStore, {
   save: action.bound,
   load: action.bound,
   set: action.bound,
+  remove: action.bound,
   sortedFavourites: computed,
 });

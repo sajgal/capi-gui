@@ -15,6 +15,11 @@ class ShowTransportLayer {
 
     return axios.post(url, { data }, config);
   }
+
+  getShow(endpoint, uuid) {
+    const url = `${endpoint}/content/v1/shows/${uuid}`;
+    return axios.get(url);
+  }
 }
 
 export default ShowTransportLayer;

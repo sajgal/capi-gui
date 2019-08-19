@@ -45,3 +45,15 @@ export function upsert(datastore, entityId, doc) {
     })
   })
 }
+
+export function remove(datastore, entityType, entityId) {
+  return new Promise((resolve, reject) => {
+    datastore.remove({ entityId }, {}, function (err, numRemoved) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(numRemoved)
+      }
+    })
+  })
+}

@@ -37,11 +37,11 @@ class Favourites extends Component {
                 </Col>
                 <Col>
                   <Button.Group size="default">
-                    <Button type="default" onClick={() => console.log(item)}>
+                    <Button type="default" onClick={() => this.props.remove(item.entityType, item.entityId)}>
                       <Icon type="delete" />
                       Remove from favourites
                     </Button>
-                    <Button type="default" onClick={() => this.props.history.push("/shows/update")}>
+                    <Button type="default" onClick={() => this.props.history.push(`/shows/update/${item.entityId}`)}>
                       <Icon type="edit" />
                       Update
                     </Button>
@@ -69,6 +69,7 @@ class Favourites extends Component {
 export default inject(stores => {
   return ({
     load: stores.favouritesStore.load,
+    remove: stores.favouritesStore.remove,
     favourites: stores.favouritesStore.favourites,
     sortedFavourites: stores.favouritesStore.sortedFavourites,
   })
