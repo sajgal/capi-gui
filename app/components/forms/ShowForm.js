@@ -7,7 +7,29 @@ class ShowForm extends Component {
   componentDidMount() {
     const { setFieldsValue } = this.props.form;
 
-    setFieldsValue(this.props.showValues);
+    setFieldsValue(this.getFormValues(this.props.showValues));
+  }
+
+  getFormValues(showValues) {
+    if(showValues == undefined) {
+      return null;
+    }
+
+    const usedFields = [
+      'title',
+      'draft',
+      'synopsis',
+      'show_id',
+    ];
+
+    const filteredValues = Object.keys(showValues)
+      .filter(fieldName => usedFields.includes(fieldName))
+      .reduce((prev, fieldName) => {
+        prev[fieldName] = showValues[fieldName];
+        return prev;
+      }, {});
+
+    return filteredValues;
   }
 
   render() {
