@@ -7,11 +7,16 @@ class ShowForm extends Component {
   componentDidMount() {
     const { setFieldsValue } = this.props.form;
 
-    setFieldsValue(this.getFormValues(this.props.showValues));
+    setFieldsValue(this.filterFormValues(this.props.showValues));
   }
 
-  getFormValues(showValues) {
-    if(showValues == undefined) {
+  /**
+   * Filter only values that we're using in the form
+   *
+   * @param {object} showValues Object from the REST API
+   */
+  filterFormValues(showValues) {
+    if (showValues == undefined) {
       return null;
     }
 
@@ -67,7 +72,10 @@ class ShowForm extends Component {
             <Input />
           )}
         </Form.Item>
-        {getFieldDecorator('draft')(
+        {getFieldDecorator("draft", {
+          valuePropName: "checked",
+          initialValue: false
+        })(
           <Checkbox>Draft</Checkbox>
         )}
         <Form.Item label="Synopsis">
