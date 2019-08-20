@@ -1,4 +1,4 @@
-import { Form, Input, Checkbox, Button } from 'antd';
+import { Form, Input, Checkbox, Button, DatePicker, Select } from 'antd';
 import { inject } from "mobx-react"
 import { withRouter } from "react-router-dom";
 import React, { Component } from 'react';
@@ -21,6 +21,7 @@ class ShowForm extends Component {
     }
 
     const usedFields = [
+      'id',
       'title',
       'draft',
       'synopsis',
@@ -67,27 +68,81 @@ class ShowForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit}>
+        <Form.Item label="UUID">
+          {getFieldDecorator('id')(
+            <Input disabled={true} />
+          )}
+        </Form.Item>
+
         <Form.Item label="Title">
           {getFieldDecorator('title')(
             <Input />
           )}
         </Form.Item>
+
+        <Form.Item label="Available From">
+          {getFieldDecorator('available_from')(
+            <DatePicker showTime placeholder="Select Time" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Available To">
+          {getFieldDecorator('available_to')(
+            <DatePicker showTime placeholder="Select Time" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Updated At">
+          {getFieldDecorator('updated_at')(
+            <DatePicker showTime placeholder="Select Time" disabled={true} />
+          )}
+        </Form.Item>
+
         {getFieldDecorator("draft", {
           valuePropName: "checked",
           initialValue: false
         })(
           <Checkbox>Draft</Checkbox>
         )}
+
+        {getFieldDecorator("on_demand", {
+          valuePropName: "checked",
+          initialValue: false
+        })(
+          <Checkbox disabled={true}>On Demand</Checkbox>
+        )}
+
+        {getFieldDecorator("on_air", {
+          valuePropName: "checked",
+          initialValue: false
+        })(
+          <Checkbox disabled={true}>On Air</Checkbox>
+        )}
+
         <Form.Item label="Synopsis">
           {getFieldDecorator('synopsis')(
             <Input />
           )}
         </Form.Item>
+
         <Form.Item label="Show ID">
           {getFieldDecorator('show_id')(
             <Input />
           )}
         </Form.Item>
+
+        <Form.Item label="Tags">
+          {getFieldDecorator('tags')(
+            <Select mode="tags" style={{ width: '100%' }} placeholder="Tags" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Categories">
+          {getFieldDecorator('categories')(
+            <Select mode="tags" style={{ width: '100%' }} placeholder="Categories" />
+          )}
+        </Form.Item>
+
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Create
