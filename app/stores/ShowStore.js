@@ -1,4 +1,5 @@
 import { observable, decorate, action } from 'mobx';
+import moment from 'moment';
 
 class ShowStore {
   transportLayer;
@@ -26,11 +27,44 @@ class ShowStore {
   }
 
   createShow(endpoint, token, showData) {
-    return this.transportLayer.createShow(endpoint, token, showData);
+    return this.transportLayer.createShow(
+      endpoint,
+      token,
+      this.normaliseShowData(showData)
+    );
   }
 
   getShowById(endpoint, showUUID) {
     return this.transportLayer.getShow(endpoint, showUUID);
+  }
+
+  normaliseShowData(showData) {
+    let normalisedShow = {};
+    const forbiddenFields = [
+      'on_air',
+      'on_demand',
+      'id',
+      'updated_at',
+    ];
+
+    Object.keys(showData).map(key => {
+      if (showData[key] === undefined) {
+        return;
+      }
+
+      if (forbiddenFields.includes(key)) {
+        return;
+      }
+
+      if (showData[key] instanceof moment) {
+        normalisedShow[key] = showData[key].utc().format();
+        return;
+      }
+
+      normalisedShow[key] = showData[key]
+    });
+
+    return normalisedShow;
   }
 }
 
