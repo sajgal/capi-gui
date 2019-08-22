@@ -1,6 +1,7 @@
 import { Form, Input, Checkbox, Button, DatePicker, Select } from 'antd';
 import { inject } from "mobx-react"
 import { withRouter } from "react-router-dom";
+import moment from 'moment';
 import React, { Component } from 'react';
 
 class ShowForm extends Component {
@@ -20,18 +21,33 @@ class ShowForm extends Component {
       return null;
     }
 
+    const dateFields = [
+      'available_from',
+      'available_to',
+      'updated_at',
+    ]
+
     const usedFields = [
       'id',
       'title',
       'draft',
       'synopsis',
       'show_id',
+      'tags',
+      'categories',
+      'on_demand',
+      'on_air',
     ];
 
     const filteredValues = Object.keys(showValues)
-      .filter(fieldName => usedFields.includes(fieldName))
+      .filter(fieldName => usedFields.includes(fieldName) || dateFields.includes(fieldName))
       .reduce((prev, fieldName) => {
-        prev[fieldName] = showValues[fieldName];
+        if(dateFields.includes(fieldName)) {
+          prev[fieldName] = moment(showValues[fieldName]);
+        } else {
+          prev[fieldName] = showValues[fieldName];
+        }
+
         return prev;
       }, {});
 
