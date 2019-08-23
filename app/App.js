@@ -24,9 +24,9 @@ export default class App extends Component {
           <Page>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/settings" component={SettingsPage} />
-            <Route exact path="/shows" component={ShowsList} />
-            <Route exact path="/shows/create" component={ShowsCreate} />
-            <Route exact path="/shows/update/:id" component={ShowsUpdate} />
+            <Route exact path="/show" component={ShowsList} />
+            <Route exact path="/show/create" component={ShowsCreate} />
+            <Route exact path="/show/update/:id" component={ShowsUpdate} />
             <Route exact path="/favourites" component={Favourites} />
             <Route exact path="/last-response" component={LastResponsePage} />
           </Page>

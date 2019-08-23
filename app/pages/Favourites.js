@@ -41,7 +41,7 @@ class Favourites extends Component {
                       <Icon type="delete" />
                       Remove from favourites
                     </Button>
-                    <Button type="default" onClick={() => this.props.history.push(`/shows/update/${item.entityId}`)}>
+                    <Button type="default" onClick={() => this.props.history.push(`/${item.entityType}/update/${item.entityId}`)}>
                       <Icon type="edit" />
                       Update
                     </Button>

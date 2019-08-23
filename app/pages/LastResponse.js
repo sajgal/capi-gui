@@ -58,7 +58,7 @@ class LastResponsePage extends React.Component {
                 <Icon type="star" />
                 Save as Favourite
               </Button>
-              <Button type="default" onClick={() => this.props.history.push("/shows/update")}>
+              <Button type="default" onClick={() => this.props.history.push(`/${entityType}/update/${response.data.id}`)}>
                 <Icon type="edit" />
                 Update {entityType}
               </Button>
