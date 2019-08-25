@@ -27,6 +27,7 @@ class ShowStore {
   }
 
   createShow(endpoint, token, showData) {
+    this.isLoading = true;
     return this.transportLayer.createShow(
       endpoint,
       token,
@@ -34,15 +35,24 @@ class ShowStore {
     );
   }
 
+  updateShow(endpoint, token, showData) {
+    this.isLoading = true;
+    return this.transportLayer.updateShow(
+      endpoint,
+      showData.id,
+      token,
+      this.normaliseShowData(showData)
+    );
+  }
+
   getShowById(endpoint, showUUID) {
+    this.isLoading = false;
     return this.transportLayer.getShow(endpoint, showUUID);
   }
 
   normaliseShowData(showData) {
     let normalisedShow = {};
     const forbiddenFields = [
-      'on_air',
-      'on_demand',
       'id',
       'updated_at',
     ];
@@ -75,5 +85,6 @@ export default decorate(ShowStore, {
   updateShows: action.bound,
   loadShows: action.bound,
   createShow: action.bound,
+  updateShow: action.bound,
   getShowById: action.bound,
 });

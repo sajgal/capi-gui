@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from "react-helmet";
-import { Icon, Table } from 'antd';
+import { Table, Spin, Row, Col } from 'antd';
 import { inject } from "mobx-react";
 import styled from 'styled-components';
 
@@ -11,6 +11,14 @@ const StyledTable = styled(Table)`
   table {
     background: white;
   }
+`;
+
+const Centered = styled.div`
+  display: grid;
+  width: 100%;
+  min-height: 200px;
+  justify-items: center;
+  align-items: center;
 `;
 
 class Shows extends React.Component {
@@ -37,7 +45,7 @@ class Shows extends React.Component {
 
         {
           this.props.isLoading || this.props.storeNotLoaded ?
-            <Icon type="loading" /> :
+            <Centered><Spin /></Centered> :
             <StyledTable rowKey="id" columns={SHOW_TABLE_SCHEMA} dataSource={this.props.shows} size="middle" bordered={true} />
         }
       </PageContent>

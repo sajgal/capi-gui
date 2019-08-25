@@ -13,7 +13,11 @@ class Create extends Component {
           <title>CAPI Desktop - Create Show</title>
         </Helmet>
 
-        <ShowForm submitAction={this.props.createShow} />
+        <ShowForm
+          submitAction={this.props.createShow}
+          submitButtonLabel="Create"
+          isLoading={this.props.isLoading}
+        />
       </PageContent >
     );
   }
@@ -22,6 +26,7 @@ class Create extends Component {
 export default inject(stores => {
   return ({
     createShow: stores.showStore.createShow,
+    isLoading: stores.showStore.isLoading,
     token: stores.settingsStore.settings['settings-api-token'],
     endpoint: stores.settingsStore.settings['settings-api-endpoint'],
     setLastResponse: stores.uiStore.setLastResponse,

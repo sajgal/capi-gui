@@ -1,24 +1,42 @@
 import axios from 'axios';
 
 class ShowTransportLayer {
-  fetchShows(endpoint) {
-    const url = `${endpoint}/content/v1/shows`;
+  fetchShows(endpoint, limit = 20) {
+    const url = `${endpoint}/content/v1/shows?limit=${limit}`;
+    const config = {
+      headers: { 'Cache-Control': 'no-cache' }
+    };
 
-    return axios.get(url);
+    return axios.get(url, config);
   }
 
   createShow(endpoint, token, data) {
     const url = `${endpoint}/content/v1/shows`;
     const config = {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
     };
 
     return axios.post(url, { data }, config);
   }
 
   getShow(endpoint, uuid) {
+    const url = `${endpoint}/content/v1/shows/${uuid}?clientTime=${new Date().getTime()}`;
+    const config = {
+      headers: { 'Cache-Control': 'no-cache' }
+    };
+
+    return axios.get(url, config);
+  }
+
+  updateShow(endpoint, uuid, token, data) {
     const url = `${endpoint}/content/v1/shows/${uuid}`;
-    return axios.get(url);
+    const config = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    };
+
+    return axios.patch(url, { data }, config);
   }
 }
 

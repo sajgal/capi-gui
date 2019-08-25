@@ -37,13 +37,13 @@ class Favourites extends Component {
                 </Col>
                 <Col>
                   <Button.Group size="default">
-                    <Button type="default" onClick={() => this.props.remove(item.entityType, item.entityId)}>
-                      <Icon type="delete" />
-                      Remove from favourites
-                    </Button>
                     <Button type="default" onClick={() => this.props.history.push(`/${item.entityType}/update/${item.entityId}`)}>
-                      <Icon type="edit" />
+                      <Icon type="edit" theme="twoTone" twoToneColor="#08415C" />
                       Update
+                    </Button>
+                    <Button type="default" onClick={() => this.props.remove(item.entityType, item.entityId)}>
+                      <Icon type="delete" theme="twoTone" twoToneColor="#A63A50" />
+                      Remove from favourites
                     </Button>
                   </Button.Group>
                 </Col>

@@ -37,7 +37,7 @@ class Home extends Component {
               <DashboardCard
                 setHomeHoverArea={this.props.setHomeHoverArea}
                 cardId={'show-list'}
-                link={'/shows'}
+                link={'/show'}
                 label={'Shows List'}
                 icon={'read'}
                 homeHoverArea={this.props.homeHoverArea} />
@@ -45,7 +45,7 @@ class Home extends Component {
               <DashboardCard
                 setHomeHoverArea={this.props.setHomeHoverArea}
                 cardId={'show-create'}
-                link={'/shows/create'}
+                link={'/show/create'}
                 label={'Create New'}
                 icon={'folder-add'}
                 homeHoverArea={this.props.homeHoverArea} />

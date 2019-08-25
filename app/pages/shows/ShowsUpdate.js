@@ -41,7 +41,12 @@ class Update extends Component {
 
         {this.state.showValues === null ?
           <SpinBox><Spin /></SpinBox> :
-          <ShowForm submitAction={this.props.createShow} showValues={this.state.showValues} />
+          <ShowForm
+            submitAction={this.props.updateShow}
+            showValues={this.state.showValues}
+            submitButtonLabel="Update"
+            isLoading={this.props.isLoading}
+          />
         }
 
       </PageContent >
@@ -51,8 +56,10 @@ class Update extends Component {
 
 export default inject(stores => {
   return ({
+    updateShow: stores.showStore.updateShow,
     getShow: stores.showStore.getShowById,
     endpoint: stores.settingsStore.settings['settings-api-endpoint'],
     setLastResponse: stores.uiStore.setLastResponse,
+    isLoading: stores.showStore.isLoading,
   })
 })(Update);

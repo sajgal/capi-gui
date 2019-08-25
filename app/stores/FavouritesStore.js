@@ -18,6 +18,10 @@ class FavouritesStore {
     return upsert(this.favouritesDataStore, entityId, doc)
   }
 
+  update(entityId, title) {
+    this.favouritesDataStore.update({ entityId: entityId }, { $set: { title } });
+  }
+
   load() {
     findAndSort(this.favouritesDataStore, {}, { updatedAt: -1 })
       .then(docs => this.set(docs))
@@ -34,6 +38,12 @@ class FavouritesStore {
         this.set(remainingFavourites);
       })
       .catch(err => console.log(err))
+  }
+
+  isFavourite(entityId) {
+    return this.favourites.some(doc => {
+      return doc.entityId === entityId;
+    });
   }
 
   get sortedFavourites() {
@@ -56,6 +66,8 @@ export default decorate(FavouritesStore, {
   save: action.bound,
   load: action.bound,
   set: action.bound,
+  update: action.bound,
   remove: action.bound,
+  isFavourite: action.bound,
   sortedFavourites: computed,
 });

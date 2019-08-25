@@ -4,31 +4,9 @@ import { inject } from 'mobx-react';
 import React from 'react';
 
 import PageContent from '../components/PageContent';
+import AddToFavouritesButton from '../components/AddToFavouritesButton';
 
 class LastResponsePage extends React.Component {
-  onFavouriteClick(entityType, entityId, title) {
-    this.props.saveFavourite(entityType, entityId, title)
-      .then(response => {
-        const btn = (
-          <Button type="primary" size="small" onClick={() => this.props.history.push("/favourites")}>
-            Show Favourites
-          </Button>
-        );
-
-        notification["success"]({
-          message: 'Successfuly added to favourites',
-          description: `${entityType}: ${title} added to favourites.`,
-          btn,
-        });
-      })
-      .catch(error => {
-        notification["error"]({
-          message: 'Could not add to favourites',
-          description: error,
-        });
-      });
-  }
-
   render() {
     let lastResponse = <Empty />;
 
@@ -54,10 +32,11 @@ class LastResponsePage extends React.Component {
         <Row type="flex" justify="end">
           <Col>
             <Button.Group size="default">
-              <Button type="default" onClick={() => this.onFavouriteClick(entityType, response.data.id, response.data.title)}>
-                <Icon type="star" />
-                Save as Favourite
-              </Button>
+              <AddToFavouritesButton
+                isFavourite={this.props.isFavourite(response.data.id)}
+                response={response}
+                entityType={entityType}
+              />
               <Button type="default" onClick={() => this.props.history.push(`/${entityType}/update/${response.data.id}`)}>
                 <Icon type="edit" />
                 Update {entityType}
@@ -89,5 +68,6 @@ export default inject(stores => {
   return ({
     response: stores.uiStore.lastResponse,
     saveFavourite: stores.favouritesStore.save,
+    isFavourite: stores.favouritesStore.isFavourite
   })
 })(LastResponsePage);
