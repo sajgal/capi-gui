@@ -17,6 +17,7 @@ class Create extends Component {
           submitAction={this.props.createShow}
           submitButtonLabel="Create"
           isLoading={this.props.isLoading}
+          hideDeleteButton={true}
         />
       </PageContent >
     );

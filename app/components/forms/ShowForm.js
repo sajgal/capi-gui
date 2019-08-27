@@ -1,4 +1,4 @@
-import { Form, Input, Checkbox, Button, DatePicker, Select, Row, Col, Icon } from 'antd';
+import { Form, Input, Checkbox, Button, DatePicker, Select, Row, Col, Icon, notification } from 'antd';
 import { inject } from "mobx-react"
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
@@ -9,6 +9,32 @@ class ShowForm extends Component {
     const { setFieldsValue } = this.props.form;
 
     setFieldsValue(this.filterFormValues(this.props.showValues));
+  }
+
+  deleteShow() {
+    const { deleteShow, token, endpoint, removeFromFavourites, stopLoading, showValues } = this.props;
+
+    deleteShow(endpoint, token, showValues.id)
+      .then(
+        () => {
+          removeFromFavourites("show", showValues.id);
+
+          notification["success"]({
+            message: 'Success',
+            description: `show ${showValues.id} deleted successfully.`,
+          });
+
+          this.props.history.push(`/`);
+        }
+      )
+      .catch((response) => {
+        notification["error"]({
+          message: 'Something went wrong',
+          description: `show ${showValues.id} not deleted.`,
+        });
+      });
+
+    stopLoading();
   }
 
   /**
@@ -191,13 +217,30 @@ class ShowForm extends Component {
           </Col>
         </Row>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            {this.props.isLoading ?
-              <Icon type="loading" spin /> : this.props.submitButtonLabel || "Submit"
+        <Row type="flex" justify="space-between">
+          <Col>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                {this.props.isLoading ?
+                  <Icon type="loading" spin /> : this.props.submitButtonLabel || "Submit"
+                }
+              </Button>
+            </Form.Item>
+          </Col>
+
+          <Col>
+            {!this.props.hideDeleteButton &&
+              <Form.Item>
+                <Button type="danger" onClick={() => this.deleteShow()}>
+                  {this.props.isLoading ?
+                    <Icon type="loading" spin /> : "Delete"
+                  }
+                </Button>
+              </Form.Item>
             }
-          </Button>
-        </Form.Item>
+          </Col>
+        </Row>
+
       </Form>
     );
   }
@@ -211,5 +254,7 @@ export default inject(stores => {
     setLastResponse: stores.uiStore.setLastResponse,
     updateFavourite: stores.favouritesStore.update,
     stopLoading: stores.showStore.stopLoading,
+    deleteShow: stores.showStore.deleteShow,
+    removeFromFavourites: stores.favouritesStore.remove,
   })
 })(Form.create({ name: 'show-form' })(withRouter(ShowForm)));

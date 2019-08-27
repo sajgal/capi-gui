@@ -1,7 +1,7 @@
 import { inject } from "mobx-react"
 import { Helmet } from "react-helmet";
 import React, { Component } from 'react';
-import { Spin } from 'antd';
+import { Spin, notification } from 'antd';
 import styled from 'styled-components';
 
 import PageContent from '../../components/PageContent';
@@ -27,8 +27,13 @@ class Update extends Component {
       .then(showValuesResponse => {
         this.setState({ showValues: showValuesResponse.data.data })
       })
-      .catch(error => {
-        console.log(error);
+      .catch(response => {
+        notification["error"]({
+          message: 'Error',
+          description: response.message,
+        });
+
+        this.props.history.push(`/`);
       });
   }
 
