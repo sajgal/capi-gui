@@ -66,6 +66,7 @@ class ShowForm extends Component {
             .then(response => {
               // Update local entity title if it's saved as favourite
               this.props.updateFavourite(response.data.data.id, response.data.data.title);
+              this.props.stopLoading();
 
               // Set the response to UI Store
               this.props.setLastResponse(
@@ -209,5 +210,6 @@ export default inject(stores => {
     endpoint: stores.settingsStore.settings['settings-api-endpoint'],
     setLastResponse: stores.uiStore.setLastResponse,
     updateFavourite: stores.favouritesStore.update,
+    stopLoading: stores.showStore.stopLoading,
   })
 })(Form.create({ name: 'show-form' })(withRouter(ShowForm)));

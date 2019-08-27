@@ -20,6 +20,10 @@ class ShowStore {
       });
   };
 
+  stopLoading() {
+    this.isLoading = false;
+  }
+
   updateShows(showsData) {
     this.shows = showsData || [];
     this.isLoading = false;
@@ -76,6 +80,15 @@ class ShowStore {
 
     return normalisedShow;
   }
+
+  deleteShow(endpoint, token, showUUID) {
+    this.isLoading = true;
+    return this.transportLayer.deleteShow(
+      endpoint,
+      token,
+      showUUID
+    );
+  }
 }
 
 export default decorate(ShowStore, {
@@ -87,4 +100,6 @@ export default decorate(ShowStore, {
   createShow: action.bound,
   updateShow: action.bound,
   getShowById: action.bound,
+  deleteShow: action.bound,
+  stopLoading: action.bound,
 });

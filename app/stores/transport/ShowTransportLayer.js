@@ -38,6 +38,18 @@ class ShowTransportLayer {
 
     return axios.patch(url, { data }, config);
   }
+
+  deleteShow(endpoint, token, uuid) {
+    const url = `${endpoint}/content/v1/shows/${uuid}`;
+    const config = {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Authorization': `Bearer ${token}`,
+      }
+    };
+
+    return axios.delete(url, config);
+  }
 }
 
 export default ShowTransportLayer;

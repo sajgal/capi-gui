@@ -7,6 +7,37 @@ import PageContent from '../components/PageContent';
 import AddToFavouritesButton from '../components/AddToFavouritesButton';
 
 class LastResponsePage extends React.Component {
+  deleteEntity(entityType, entityId) {
+    const { deleteShow, token, endpoint, removeFromFavourites } = this.props;
+
+    switch (entityType) {
+      case "show":
+        deleteShow(endpoint, token, entityId)
+          .then(
+            () => {
+              removeFromFavourites(entityType, entityId);
+
+              notification["success"]({
+                message: 'Success',
+                description: `${entityType} ${entityId} deleted successfully.`,
+              });
+
+              this.props.history.push(`/`);
+            }
+          )
+          .catch(() => {
+            notification["error"]({
+              message: 'Something went wrong',
+              description: `${entityType} ${entityId} not deleted.`,
+            });
+          });
+        break;
+
+      default:
+        break;
+    }
+  }
+
   render() {
     let lastResponse = <Empty />;
 
@@ -41,9 +72,10 @@ class LastResponsePage extends React.Component {
                 <Icon type="edit" />
                 Update {entityType}
               </Button>
-              <Button type="danger">
-                <Icon type="delete" />
-                Delete
+              <Button type="danger" onClick={() => this.deleteEntity(entityType, response.data.id)}>
+                {this.props.showIsLoading ?
+                  <Icon type="loading" spin /> : <span><Icon type="delete" /> Delete</span>
+                }
               </Button>
             </Button.Group>
           </Col>
@@ -68,6 +100,11 @@ export default inject(stores => {
   return ({
     response: stores.uiStore.lastResponse,
     saveFavourite: stores.favouritesStore.save,
-    isFavourite: stores.favouritesStore.isFavourite
+    isFavourite: stores.favouritesStore.isFavourite,
+    deleteShow: stores.showStore.deleteShow,
+    token: stores.settingsStore.settings['settings-api-token'],
+    endpoint: stores.settingsStore.settings['settings-api-endpoint'],
+    removeFromFavourites: stores.favouritesStore.remove,
+    showIsLoading: stores.showStore.isLoading,
   })
 })(LastResponsePage);
