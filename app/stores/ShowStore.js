@@ -6,6 +6,7 @@ class ShowStore {
   isLoading = false;
   storeNotLoaded = true;
   shows = [];
+  totalShowCount = 0;
 
   constructor(transportLayer) {
     this.transportLayer = transportLayer;
@@ -16,6 +17,7 @@ class ShowStore {
     this.transportLayer
       .fetchShows(endpoint)
       .then(response => {
+        this.setTotalShowCount(response.data.meta.pagination.total);
         this.updateShows(response.data.data);
       });
   };
@@ -89,12 +91,17 @@ class ShowStore {
       showUUID
     );
   }
+
+  setTotalShowCount(count) {
+    this.totalShowCount = count;
+  }
 }
 
 export default decorate(ShowStore, {
   isLoading: observable,
   shows: observable,
   storeNotLoaded: observable,
+  totalShowCount: observable,
   updateShows: action.bound,
   loadShows: action.bound,
   createShow: action.bound,
@@ -102,4 +109,5 @@ export default decorate(ShowStore, {
   getShowById: action.bound,
   deleteShow: action.bound,
   stopLoading: action.bound,
+  setTotalShowCount: action.bound,
 });

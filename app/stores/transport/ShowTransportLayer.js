@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class ShowTransportLayer {
-  fetchShows(endpoint, limit = 20) {
+  fetchShows(endpoint, limit = 15) {
     const url = `${endpoint}/content/v1/shows?limit=${limit}`;
     const config = {
       headers: { 'Cache-Control': 'no-cache' }

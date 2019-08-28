@@ -37,6 +37,15 @@ class Shows extends React.Component {
   }
 
   render() {
+    const paginationConfig = {
+      defaultPageSize: 15,
+      total: this.props.totalShowCount,
+      onChange: (page, pageSize) => {
+        console.log({page});
+        console.log({pageSize});
+      },
+    }
+
     return (
       <PageContent header="Shows" hideFooter={true} hideContentWrapper={true}>
         <Helmet>
@@ -46,7 +55,7 @@ class Shows extends React.Component {
         {
           this.props.isLoading || this.props.storeNotLoaded ?
             <Centered><Spin /></Centered> :
-            <StyledTable rowKey="id" columns={SHOW_TABLE_SCHEMA} dataSource={this.props.shows} size="middle" bordered={true} />
+            <StyledTable rowKey="id" columns={SHOW_TABLE_SCHEMA} dataSource={this.props.shows} size="middle" bordered={true} pagination={paginationConfig} />
         }
       </PageContent>
     );
@@ -60,5 +69,6 @@ export default inject(stores => {
     isLoading: stores.showStore.isLoading,
     storeNotLoaded: stores.showStore.storeNotLoaded,
     endpoint: stores.settingsStore.settings['settings-api-endpoint'],
+    totalShowCount: stores.showStore.totalShowCount,
   })
 })(Shows);
