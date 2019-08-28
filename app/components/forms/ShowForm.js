@@ -32,9 +32,10 @@ class ShowForm extends Component {
           message: 'Something went wrong',
           description: `show ${showValues.id} not deleted.`,
         });
+      })
+      .finally(() => {
+        stopLoading();
       });
-
-    stopLoading();
   }
 
   /**
@@ -92,7 +93,6 @@ class ShowForm extends Component {
             .then(response => {
               // Update local entity title if it's saved as favourite
               this.props.updateFavourite(response.data.data.id, response.data.data.title);
-              this.props.stopLoading();
 
               // Set the response to UI Store
               this.props.setLastResponse(
@@ -107,6 +107,9 @@ class ShowForm extends Component {
             })
             .catch(error => {
               console.log(error);
+            })
+            .finally(() => {
+              this.props.stopLoading();
             });
         }
       });
